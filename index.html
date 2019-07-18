@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>leecho_memo</title>
+    <link rel="stylesheet" href="./src/css/app.css">
+</head>
+<body>
+<header class="header-wrapper">
+    <h1 class="header__text">LEECHO <strong>메모</strong></h1>
+    <div class="header__info">
+        <span class="header__user-name">leecho</span>
+        <span class="header__thumb">
+            <img src="./src/images/thumb.png" alt="" class="header__user-img">
+        </span>
+    </div>
+</header>
+
+<main class="container">
+    <!-- <nav class="side-menu"></nav> -->
+    <section class="memo-wrapper">
+        <div class="memo">
+            <div class="memo__head" contenteditable=true></div>
+            <div class="memo__body" contenteditable=true></div>
+        </div>
+
+
+        <!-- 메모가 없을 때 -->
+        <div class="memo-empty">
+            <p class="memo-empty__text">메모가 없습니다.<br>메모를 작성해주세요.</p>
+            <button class="memo-empty__button">작성하기</button>
+        </div>
+        <!-- //메모가 없을 때 -->
+    </section>
+</main>
+
+<footer class="footer-wrapper">
+    <p class="footer__copyright">All Rights leecho.</p>
+</footer>
+
+<script src="./src/js/app.js"></script>
+</body>
+</html>
