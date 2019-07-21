@@ -30,8 +30,8 @@ View.prototype.generatorMemo = function(key){
     var data = this.model.data;
     var memo = `
         <div class="memo" data-id="${key}">
-            <div class="memo__head" contenteditable="true">${data[key].title}</div>
-            <div class="memo__body" contenteditable="true">${data[key].contents}</div>
+            <div class="memo__head" contenteditable="false">${data[key].title}</div>
+            <div class="memo__body" contenteditable="false">${data[key].contents}</div>
             <button type="button" class="memo__delete" data-id="${key}">X</button>
         </div>
     `;
@@ -39,8 +39,8 @@ View.prototype.generatorMemo = function(key){
     return this;
 }
 
-View.prototype.removeMemo = function(key){
-    document.querySelector(`.memo[data-id="${key}"]`).remove();
+View.prototype.removeMemo = function(target){
+    target.remove();
 }
 
 View.prototype.clearForm = function(){

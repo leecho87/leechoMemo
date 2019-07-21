@@ -52,5 +52,5 @@ Controller.prototype.onUpdate = function(){
 }
 
 Controller.prototype.onRemove = function(e){
-    this.view.removeMemo(e.target.dataset.id);
+    this.view.removeMemo(e.target.offsetParent);
 }

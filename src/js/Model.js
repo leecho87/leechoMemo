@@ -7,11 +7,13 @@ var Model = function(){
 Model.prototype.inValidator = function(key, title, contents){
     var title = title.replace(/</g, '&lt;');
         title = title.replace(/>/g, '&gt;');
+        ( title.length > 0 ? title = title : title = '-' );
     var contents = contents.replace(/</g, '&lt;');
         contents = contents.replace(/>/g, '&gt;');
         contents = contents.replace(/\n/g, '<br>');
         contents = contents.replace(/\s/g, '&nbsp;');
     var date = this.generatorTime();
+
     this.generatorData(key, title, contents, date)
 }
 
