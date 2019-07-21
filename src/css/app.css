@@ -13,12 +13,17 @@
     display:block;
 }
 .memo-empty {
-    display:none;
+    /* display:none; */
     position:fixed;
     left:50%;
     top:50%;
     transform:translate(-50%, -50%);
     text-align:center;
+}
+.memo-empty__text {
+    font-size:20px;
+    line-height:1.6;
+    color:#000
 }
 .writable-area {
     position:relative;

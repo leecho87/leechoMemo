@@ -28,19 +28,47 @@ View.prototype.showPlaceholder = function(el, value){
 
 View.prototype.generatorMemo = function(key){
     var data = this.model.data;
-    var memo = `
-        <div class="memo" data-id="${key}">
-            <div class="memo__head" contenteditable="false">${data[key].title}</div>
-            <div class="memo__body" contenteditable="false">${data[key].contents}</div>
-            <button type="button" class="memo__delete" data-id="${key}">X</button>
-        </div>
-    `;
+    var key = key || 'empty'
+    var flag = Object.keys(data).length === 0 && JSON.stringify(data) === JSON.stringify({});
+    var memo = ``;
+    var emptyEl = document.querySelector('.memo-empty');
+    console.log('generatorMemo', flag)
+    if(!flag){
+        memo = `
+            <div class="memo" data-id="${key}">
+                <div class="memo__head" contenteditable="false">${data[key].title}</div>
+                <div class="memo__body" contenteditable="false">${data[key].contents}</div>
+                <button type="button" class="memo__delete" data-id="${key}">X</button>
+            </div>
+        `;
+    }else{
+        memo = `
+            <div class="memo-empty">
+                <p class="memo-empty__text">메모가 없습니다.<br>메모를 작성해주세요.</p>
+            </div>
+        `;
+    }
+
+    // if ( Object.keys(data).length === 1 && emptyEl !== null ) {
+    //     emptyEl.remove();
+    //     console.log(emptyEl)
+    //     // document.querySelector('.memo-empty').remove();
+    // };
+
+    // console.log('emptyEl', emptyEl)
+
     this.pickElements.memoContainer.innerHTML += memo;
     return this;
 }
 
 View.prototype.removeMemo = function(target){
-    target.remove();
+    var key = target.dataset.id;
+    var el = target.offsetParent;
+
+    el.remove();
+    delete this.model.data[key];
+    console.log('removeMemo()')
+    this.generatorMemo();
 }
 
 View.prototype.clearForm = function(){

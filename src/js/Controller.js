@@ -18,6 +18,8 @@ Controller.prototype.init = function(){
                 .on('writeUpdate', 'click', this.onUpdate.bind(this))
 
     this.view.setup('memoContainer', document.querySelector('.memo-view-area'))
+
+    this.view.generatorMemo();
 }
 
 Controller.prototype.bindEvents = function(){
@@ -52,5 +54,5 @@ Controller.prototype.onUpdate = function(){
 }
 
 Controller.prototype.onRemove = function(e){
-    this.view.removeMemo(e.target.offsetParent);
+    this.view.removeMemo(e.target);
 }
