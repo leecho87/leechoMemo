@@ -70,6 +70,7 @@
     margin-bottom:12px;
 }
 .memo {
+    position:relative;
     float:left;
     box-sizing:border-box;
     width:32%;
@@ -100,4 +101,17 @@
     padding:8px;
     min-height:200px;
     outline:none;
+}
+.memo__delete {
+    position:absolute;
+    right:0;
+    top:0;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    padding:0;
+    font-size:18px;
+    font-weight:bold;
+    background:none;
+    color:#000
 }

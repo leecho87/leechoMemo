@@ -18,7 +18,15 @@ Controller.prototype.init = function(){
                 .on('writeUpdate', 'click', this.onUpdate.bind(this))
 
     this.view.setup('memoContainer', document.querySelector('.memo-view-area'))
+}
 
+Controller.prototype.bindEvents = function(){
+    this.view.setup('memoDelete', document.querySelectorAll('.memo__delete'));
+    for(var i=0; i<this.view.pickElements.memoDelete.length; i++){
+        this.view.pickElements.memoDelete[i].addEventListener('click', this.onRemove.bind(this));
+    }
+
+    this.view.setup('memoItem', document.querySelectorAll('.memo'));
 }
 
 Controller.prototype.onKeyup = function(keyboardEvent){
@@ -40,4 +48,9 @@ Controller.prototype.onUpdate = function(){
 
     this.model.inValidator(key, titleText, contentsText);
     this.view.generatorMemo(key).clearForm();
+    this.bindEvents();
+}
+
+Controller.prototype.onRemove = function(e){
+    this.view.removeMemo(e.target.dataset.id);
 }
