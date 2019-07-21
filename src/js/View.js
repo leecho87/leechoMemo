@@ -28,11 +28,10 @@ View.prototype.showPlaceholder = function(el, value){
 
 View.prototype.generatorMemo = function(key){
     var data = this.model.data;
-    var key = key || 'empty'
+    var key = key;
     var flag = Object.keys(data).length === 0 && JSON.stringify(data) === JSON.stringify({});
     var memo = ``;
-    var emptyEl = document.querySelector('.memo-empty');
-    console.log('generatorMemo', flag)
+
     if(!flag){
         memo = `
             <div class="memo" data-id="${key}">
@@ -49,26 +48,30 @@ View.prototype.generatorMemo = function(key){
         `;
     }
 
-    // if ( Object.keys(data).length === 1 && emptyEl !== null ) {
-    //     emptyEl.remove();
-    //     console.log(emptyEl)
-    //     // document.querySelector('.memo-empty').remove();
-    // };
-
-    // console.log('emptyEl', emptyEl)
+    if( Object.keys(data).length === 1 && document.querySelector('.memo-empty')){
+        document.querySelector('.memo-empty').remove();
+    }
 
     this.pickElements.memoContainer.innerHTML += memo;
+
     return this;
 }
+
+// View.prototype.isEmpty = function(){
+//     console.log(tag, 'isEmpty()', this.model)
+// }
+
 
 View.prototype.removeMemo = function(target){
     var key = target.dataset.id;
     var el = target.offsetParent;
-
     el.remove();
-    delete this.model.data[key];
-    console.log('removeMemo()')
+
     this.generatorMemo();
+}
+
+View.prototype.modifyMemo = function(el){
+    console.log(tag, 'modifyMemo()', el)
 }
 
 View.prototype.clearForm = function(){

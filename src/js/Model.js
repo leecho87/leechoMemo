@@ -7,11 +7,13 @@ var Model = function(){
 Model.prototype.inValidator = function(key, title, contents){
     var title = title.replace(/</g, '&lt;');
         title = title.replace(/>/g, '&gt;');
-        ( title.length > 0 ? title = title : title = '-' );
+        ( title.length > 0 ? title = title : title = '제목이 없습니다.' );
+
     var contents = contents.replace(/</g, '&lt;');
         contents = contents.replace(/>/g, '&gt;');
         contents = contents.replace(/\n/g, '<br>');
         contents = contents.replace(/\s/g, '&nbsp;');
+
     var date = this.generatorTime();
 
     this.generatorData(key, title, contents, date)
@@ -21,6 +23,7 @@ Model.prototype.generatorTime = function(){
     var pad = function(date){
         return date >9 ? date : '0' + date;
     }
+
     var date = (function(date){
         return [
             date.getFullYear(),
@@ -37,6 +40,7 @@ Model.prototype.generatorTime = function(){
     })(new Date());
 
     var concatDate = date.concat(' ', time);
+
     return concatDate;
 }
 
@@ -51,4 +55,12 @@ Model.prototype.generatorData = function(key, title, contents, date){
         date,
     };
     return this;
+}
+
+Model.prototype.modifyData = function(key){
+    console.log(key);
+}
+
+Model.prototype.removeData = function(key){
+    delete this.data[key];
 }

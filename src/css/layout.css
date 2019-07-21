@@ -43,9 +43,10 @@
 }
 .container {
     position:relative;
-    padding:0 0 0 160px
+    /* padding:0 0 0 160px */
 }
 .side-menu {
+    display:none;
     position:absolute;
     left:0;
     top:20px;

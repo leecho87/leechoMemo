@@ -25,10 +25,13 @@ Controller.prototype.init = function(){
 Controller.prototype.bindEvents = function(){
     this.view.setup('memoDelete', document.querySelectorAll('.memo__delete'));
     for(var i=0; i<this.view.pickElements.memoDelete.length; i++){
-        this.view.pickElements.memoDelete[i].addEventListener('click', this.onRemove.bind(this));
+        this.view.pickElements.memoDelete[i].addEventListener('click', this.onRemove.bind(this), false);
     }
 
     this.view.setup('memoItem', document.querySelectorAll('.memo'));
+    for(var i=0; i<this.view.pickElements.memoItem.length; i++){
+        this.view.pickElements.memoItem[i].addEventListener('click', this.onModify.bind(this), false);
+    }
 }
 
 Controller.prototype.onKeyup = function(keyboardEvent){
@@ -54,5 +57,13 @@ Controller.prototype.onUpdate = function(){
 }
 
 Controller.prototype.onRemove = function(e){
+    this.model.removeData(e.target.dataset.id)
     this.view.removeMemo(e.target);
+}
+
+Controller.prototype.onModify = function(e){
+    e.stopPropagation();
+    var key = e.currentTarget.dataset.id;
+    this.model.modifyData(key)
+    this.view.modifyMemo(e.currentTarget);
 }
