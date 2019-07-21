@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>leecho_memo</title>
     <link rel="stylesheet" href="./src/css/app.css">
+    <!--<script>script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
 </head>
+
 <body>
 <header class="header-wrapper">
-    <h1 class="header__text">LEECHO <strong>메모</strong></h1>
+    <h1 class="header__text"><strong>메모장</strong></h1>
     <div class="header__info">
         <span class="header__user-name">leecho</span>
         <span class="header__thumb">
@@ -19,13 +21,53 @@
 </header>
 
 <main class="container">
-    <!-- <nav class="side-menu"></nav> -->
-    <section class="memo-wrapper">
-        <div class="memo">
-            <div class="memo__head" contenteditable=true></div>
-            <div class="memo__body" contenteditable=true></div>
-        </div>
 
+    <nav class="side-menu">
+        좌측메뉴영역
+    </nav>
+
+    <section class="memo-wrapper">
+        <article class="writable-area">
+            <div class="writable__head">
+                <div class="writable__placeholder">제목</div>
+                <div class="writable__title" contenteditable="true"></div>
+            </div>
+            <div class="writable__body">
+                <div class="writable__placeholder">내용</div>
+                <div class="writable__contents" contenteditable="true"></div>
+            </div>
+            <div class="wrtiable__action">
+                <button type="button" class="writable__button writable__button--save">저장</button><br>
+                <button type="button" class="writable__button writable__button--cancel">취소</button>
+            </div>
+        </article>
+
+        <div class="memo-view-area">
+            <!-- <div class="memo">
+                <div class="memo__head" contenteditable="true"></div>
+                <div class="memo__body" contenteditable="true"></div>
+            </div>
+            <div class="memo">
+                <div class="memo__head" contenteditable="true"></div>
+                <div class="memo__body" contenteditable="true"></div>
+            </div>
+            <div class="memo">
+                <div class="memo__head" contenteditable="true"></div>
+                <div class="memo__body" contenteditable="true"></div>
+            </div>
+            <div class="memo">
+                <div class="memo__head" contenteditable="true"></div>
+                <div class="memo__body" contenteditable="true"></div>
+            </div>
+            <div class="memo">
+                <div class="memo__head" contenteditable="true"></div>
+                <div class="memo__body" contenteditable="true"></div>
+            </div>
+            <div class="memo">
+                <div class="memo__head" contenteditable="true"></div>
+                <div class="memo__body" contenteditable="true"></div>
+            </div> -->
+        </div>
 
         <!-- 메모가 없을 때 -->
         <div class="memo-empty">
@@ -40,6 +82,9 @@
     <p class="footer__copyright">All Rights leecho.</p>
 </footer>
 
+<script src="./src/js/model.js"></script>
+<script src="./src/js/view.js"></script>
+<script src="./src/js/controller.js"></script>
 <script src="./src/js/app.js"></script>
 </body>
 </html>
