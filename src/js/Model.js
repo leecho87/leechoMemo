@@ -21,7 +21,7 @@ Model.prototype.inValidator = function(key, title, contents){
 
 Model.prototype.generatorTime = function(){
     var pad = function(date){
-        return date >9 ? date : '0' + date;
+        return date > 9 ? date : '0' + date;
     }
 
     var date = (function(date){
@@ -40,7 +40,6 @@ Model.prototype.generatorTime = function(){
     })(new Date());
 
     var concatDate = date.concat(' ', time);
-
     return concatDate;
 }
 
@@ -58,7 +57,7 @@ Model.prototype.generatorData = function(key, title, contents, date){
 }
 
 Model.prototype.modifyData = function(key){
-    console.log(key);
+    console.log('key', key)
 }
 
 Model.prototype.removeData = function(key){

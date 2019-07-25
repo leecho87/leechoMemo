@@ -4,7 +4,7 @@ html,body,div,header,main,article,footer,h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dt,dd {
     font-size:15px;
     font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
     letter-spacing:-.5px;
-    color:#868e96
+    color:#474747
 }
 html,body {
     padding:0 0 40px
@@ -16,11 +16,20 @@ img {
     vertical-align:top
 }
 button {
-    padding:10px;
+    box-sizing:border-box;
+    height:32px;
+    line-height:32px;
+    border-radius:8px;
+    padding:0 8px;
     border:0 none;
-    background:#22b8cf;
+    background-color:#22b8cf;
     color:#fff;
-    cursor:pointer
+    cursor:pointer;
+    outline:none
+}
+button:focus,
+button:hover {
+    background-color:skyblue
 }
 textarea {
     resize:none;

@@ -26,52 +26,72 @@ View.prototype.showPlaceholder = function(el, value){
     }
 }
 
-View.prototype.generatorMemo = function(key){
+View.prototype.generatorMemo = function(empty, key){
     var data = this.model.data;
     var key = key;
     var flag = Object.keys(data).length === 0 && JSON.stringify(data) === JSON.stringify({});
     var memo = ``;
+    var empty = false
+    var emptyEl = document.querySelector('.memo-empty');
 
-    if(!flag){
-        memo = `
-            <div class="memo" data-id="${key}">
-                <div class="memo__head" contenteditable="false">${data[key].title}</div>
-                <div class="memo__body" contenteditable="false">${data[key].contents}</div>
-                <button type="button" class="memo__delete" data-id="${key}">X</button>
-            </div>
-        `;
-    }else{
+    if(flag){
+        empty = false;
         memo = `
             <div class="memo-empty">
                 <p class="memo-empty__text">메모가 없습니다.<br>메모를 작성해주세요.</p>
             </div>
         `;
+    }else{
+        empty = true;
+        memo = `
+            <div class="memo" data-id="${key}">
+                <div class="memo__state">
+                    ${data[key].date}
+                    <button type="button" class="memo__action memo__action--modify" data-id="${key}"></button>
+                    <button type="button" class="memo__action memo__action--setting" data-id="${key}"></button>
+                    <button type="button" class="memo__action memo__action--delete" data-id="${key}"></button>
+                </div>
+                <div class="memo__head" contenteditable="false">${data[key].title}</div>
+                <div class="memo__body" contenteditable="false">${data[key].contents}</div>
+            </div>
+        `;
     }
 
-    if( Object.keys(data).length === 1 && document.querySelector('.memo-empty')){
-        document.querySelector('.memo-empty').remove();
-    }
+    if (!flag && emptyEl !== null ) emptyEl.remove();
 
     this.pickElements.memoContainer.innerHTML += memo;
 
     return this;
 }
 
-// View.prototype.isEmpty = function(){
-//     console.log(tag, 'isEmpty()', this.model)
-// }
-
-
 View.prototype.removeMemo = function(target){
-    var key = target.dataset.id;
-    var el = target.offsetParent;
-    el.remove();
+    var flag = Object.keys(this.model.data).length === 0 && JSON.stringify(this.model.data) === JSON.stringify({});
 
-    this.generatorMemo();
+    target.offsetParent.remove();
+
+    if (flag) this.generatorMemo(false);
 }
 
 View.prototype.modifyMemo = function(el){
     console.log(tag, 'modifyMemo()', el)
+}
+
+View.prototype.settingMemo = function(e){
+    var x = e.pageX+20;
+    var y = e.pageY-10;
+    console.log('settingMemo()', e.target)
+    this.pickElements.palette.setAttribute("style", `display:block;left:${x}px;top:${y}px`);
+    this.pickElements.palette.setAttribute("data-key", `${e.target.dataset.id}`);
+}
+
+View.prototype.changeColor = function(e){
+    e.preventDefault();
+    var key = e.target.parentNode.dataset.key;
+    var code = e.target.dataset.color;
+    var memoEl = document.querySelector(`.memo[data-id="${key}"]`);
+        memoEl.setAttribute('class', `memo memo--${code}`);
+
+    //this.pickElements.palette.style.display = 'none';
 }
 
 View.prototype.clearForm = function(){
