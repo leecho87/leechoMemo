@@ -107,6 +107,11 @@ View.prototype.modifyDisplay = function(key){
     this.pickElements.modifyContainer.style.display = 'block';
     this.pickElements.modifyTitle.innerText = this.model.data[key].title;
     this.pickElements.modifyContents.innerText = this.model.data[key].contents;
+    this.pickElements.modifySave.setAttribute('data-id', key);
+}
+
+View.prototype.modifyDraw = function(){
+
 }
 
 View.prototype.modifyCancel = function(){

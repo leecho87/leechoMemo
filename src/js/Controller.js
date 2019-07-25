@@ -110,10 +110,15 @@ Controller.prototype.onModifyDisplay = function(e){
 }
 
 Controller.prototype.onModifySave = function(e){
+    var key = this.view.pickElements.modifySave.dataset.id;
     var titleText = this.view.pickElements.modifyTitle.innerText;
     var contentsText = this.view.pickElements.modifyContents.innerText;
-    console.log(tag, 'onModifySave() / titleText ', titleText);
-    console.log(tag, 'onModifySave() / contentsText ', contentsText);
+    console.log('onModifySave()', key)
+    console.log('onModifySave()', titleText)
+    console.log('onModifySave()', contentsText)
+    this.model.inValidator(key, titleText, contentsText);
+    this.view.modifyDraw(key, titleText, contentsText);
+    console.log(this)
 }
 
 Controller.prototype.onModifyCancel = function(){
