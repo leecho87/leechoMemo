@@ -1,6 +1,7 @@
 var tag = '[Model]';
 
 var Model = function(){
+    this.userName = '';
     this.data = {};
 }
 
@@ -57,7 +58,7 @@ Model.prototype.generatorData = function(key, title, contents, date){
 }
 
 Model.prototype.modifyData = function(key){
-    console.log('key', key)
+    console.log(tag, 'modifyData()');
 }
 
 Model.prototype.removeData = function(key){

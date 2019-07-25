@@ -15,6 +15,10 @@ View.prototype.on = function(target, event, handler){
     return this;
 }
 
+View.prototype.renderName = function(){
+    this.pickElements.userName.innerHTML = this.model.userName;
+}
+
 View.prototype.showPlaceholder = function(el, value){
     if( el === 'reset' ){
         for(var i=0; i<this.pickElements.placeholder.length; i++){
@@ -28,7 +32,7 @@ View.prototype.showPlaceholder = function(el, value){
 
 View.prototype.generatorMemo = function(empty, key){
     var data = this.model.data;
-    var key = key;
+    // var key = key;
     var flag = Object.keys(data).length === 0 && JSON.stringify(data) === JSON.stringify({});
     var memo = ``;
     var empty = false
@@ -72,14 +76,9 @@ View.prototype.removeMemo = function(target){
     if (flag) this.generatorMemo(false);
 }
 
-View.prototype.modifyMemo = function(el){
-    console.log(tag, 'modifyMemo()', el)
-}
-
 View.prototype.settingMemo = function(e){
     var x = e.pageX+20;
     var y = e.pageY-10;
-    console.log('settingMemo()', e.target)
     this.pickElements.palette.setAttribute("style", `display:block;left:${x}px;top:${y}px`);
     this.pickElements.palette.setAttribute("data-key", `${e.target.dataset.id}`);
 }
@@ -90,8 +89,10 @@ View.prototype.changeColor = function(e){
     var code = e.target.dataset.color;
     var memoEl = document.querySelector(`.memo[data-id="${key}"]`);
         memoEl.setAttribute('class', `memo memo--${code}`);
+}
 
-    //this.pickElements.palette.style.display = 'none';
+View.prototype.paletteHide = function(e){
+    e.target.parentNode.style.display = 'none';
 }
 
 View.prototype.clearForm = function(){
@@ -100,4 +101,16 @@ View.prototype.clearForm = function(){
     this.pickElements.writeUpdate.blur();
     this.showPlaceholder('reset');
     return this;
+}
+
+View.prototype.modifyDisplay = function(key){
+    this.pickElements.modifyContainer.style.display = 'block';
+    this.pickElements.modifyTitle.innerText = this.model.data[key].title;
+    this.pickElements.modifyContents.innerText = this.model.data[key].contents;
+}
+
+View.prototype.modifyCancel = function(){
+    this.pickElements.modifyTitle.innerText = '';
+    this.pickElements.modifyContents.innerText = '';
+    this.pickElements.modifyContainer.style.display = 'none';
 }

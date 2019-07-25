@@ -19,7 +19,21 @@ Controller.prototype.init = function(){
 
     this.view.setup('memoContainer', document.querySelector('.memo-view-area'));
     this.view.setup('palette', document.querySelector('.palette'));
+    this.view.setup('userName', document.querySelector('.header__user-name'));
+
+    this.view.setup('modifyContainer', document.querySelector('.modify-wrapper'));
+    this.view.setup('modifyTitle', document.querySelector('.modify__head'));
+    this.view.setup('modifyContents', document.querySelector('.modify__contents'));
+
     this.view.generatorMemo();
+
+    // this.settingName();
+}
+
+Controller.prototype.settingName = function(){
+    var name = window.prompt('이름을 입력해주세요.');
+    this.model.userName = name;
+    this.view.renderName();
 }
 
 Controller.prototype.bindEvents = function(){
@@ -35,7 +49,7 @@ Controller.prototype.bindEvents = function(){
 
     this.view.setup('memoModify', document.querySelectorAll('.memo__action--modify'));
     for(var i=0; i<this.view.pickElements.memoModify.length; i++){
-        this.view.pickElements.memoModify[i].addEventListener('click', this.onModify.bind(this), false);
+        this.view.pickElements.memoModify[i].addEventListener('click', this.onModifyDisplay.bind(this), false);
     }
 
     this.view.setup('paletteItem', document.querySelectorAll('.palette__item'));
@@ -43,7 +57,15 @@ Controller.prototype.bindEvents = function(){
         this.view.pickElements.paletteItem[i].addEventListener('click', this.onChangeColor.bind(this));
     }
 
+    this.view.setup('paletteButton', document.querySelector('.palette__button'))
+                .on('paletteButton', 'click', this.view.paletteHide)
+
     this.view.setup('memoItem', document.querySelectorAll('.memo'));
+
+    this.view.setup('modifySave', document.querySelector('.modify__button--save'))
+                .on('modifySave', 'click', this.onModifySave.bind(this))
+    this.view.setup('modifyCancel', document.querySelector('.modify__button--cancel'))
+                .on('modifyCancel', 'click', this.onModifyCancel.bind(this))
 }
 
 Controller.prototype.onKeyup = function(keyboardEvent){
@@ -81,9 +103,19 @@ Controller.prototype.onChangeColor = function(e){
     this.view.changeColor(e);
 }
 
-Controller.prototype.onModify = function(e){
+Controller.prototype.onModifyDisplay = function(e){
     e.stopPropagation();
-    var key = e.currentTarget.dataset.id;
-    this.model.modifyData(key)
-    this.view.modifyMemo(e.currentTarget);
+    var key = e.target.dataset.id;
+    this.view.modifyDisplay(key);
+}
+
+Controller.prototype.onModifySave = function(e){
+    var titleText = this.view.pickElements.modifyTitle.innerText;
+    var contentsText = this.view.pickElements.modifyContents.innerText;
+    console.log(tag, 'onModifySave() / titleText ', titleText);
+    console.log(tag, 'onModifySave() / contentsText ', contentsText);
+}
+
+Controller.prototype.onModifyCancel = function(){
+    this.view.modifyCancel();
 }

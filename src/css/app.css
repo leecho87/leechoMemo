@@ -37,7 +37,6 @@
 .writable__head {
     position:relative;
     box-sizing:border-box;
-    height:40px;
     border-bottom:1px solid #ccc;
 }
 .writable__body {
@@ -48,21 +47,22 @@
     left:0;
     right:0;
     padding:0 8px;
-    height:40px;
+    min-height:40px;
     line-height:40px;
     pointer-events:none;
-    color:#ccc
+    color:#ccc;
 }
 .writable__title {
-    height:40px;
-    padding:0 8px;
-    line-height:40px;
+    box-sizing:border-box;
+    min-height:40px;
+    padding:10px;
+    line-height:1.5;
     white-space:pre-wrap;
     outline:none;
 }
 .writable__contents {
     box-sizing:border-box;
-    padding:8px;
+    padding:10px;
     min-height:80px;
     outline:none;
 }
@@ -73,6 +73,11 @@
 }
 .writable__button--save {
     margin-bottom:12px;
+}
+.memo-view-area:after {
+    content:'';
+    display:block;
+    clear:both;
 }
 .memo {
     position:relative;
@@ -189,14 +194,15 @@
     background:#fff;
 }
 .modify__head {
-    height:40px;
-    padding:0 8px;
-    line-height:40px;
+    box-sizing:border-box;
+    min-height:40px;
+    padding:10px;
     border-bottom:1px solid #ccc;
     outline:none;
+    overflow-x:auto;
 }
 .modify__contents {
-    padding:8px;
+    padding:10px;
     min-height:200px;
     outline:none;
 }
@@ -205,7 +211,7 @@
     border-top:1px solid #ccc;
     text-align:center
 }
-.palette {display:none;position:fixed;width:95px;padding:10px;background:#fff;border:1px solid #ccc;box-shadow:0 0 4px 0 rgba(0, 0, 0, .3))}
+.palette {display:none;position:fixed;width:95px;padding:10px;border:1px solid #ccc;text-align:center;background:#fff;box-shadow:0 0 4px 0 rgba(0, 0, 0, .3))}
 .palette__item {position:relative;display:inline-block;width:13px;height:13px;border-width:1px;border-style:solid}
 .palette__item--1 {border-color:#e6e0b2;background-color:#fff8c5}
 .palette__item--2 {border-color:#bae6ad;background-color:#ceffc0}
@@ -217,3 +223,4 @@
 .palette__item--8 {border-color:#e696d3;background-color:#ffa6ea}
 .palette__item--9 {border-color:#d3d3d7;background-color:#eaeaee}
 .palette__item--10 {border-color:#949b9c;background-color:#a4acad}
+.palette__button {margin-top:8px}
