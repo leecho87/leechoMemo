@@ -27,7 +27,7 @@ Controller.prototype.init = function(){
 
     this.view.generatorMemo();
 
-    // this.settingName();
+    //this.settingName();
 }
 
 Controller.prototype.settingName = function(){
@@ -66,6 +66,10 @@ Controller.prototype.bindEvents = function(){
                 .on('modifySave', 'click', this.onModifySave.bind(this))
     this.view.setup('modifyCancel', document.querySelector('.modify__button--cancel'))
                 .on('modifyCancel', 'click', this.onModifyCancel.bind(this))
+    // this.view.setup('memoFavorite', document.querySelectorAll('.memo__action--favorite'))
+    // for(var i=0; i<this.view.pickElements.memoFavorite.length; i++){
+    //     this.view.pickElements.memoFavorite[i].addEventListener('click', this.onFavorite.bind(this));
+    // }
 }
 
 Controller.prototype.onKeyup = function(keyboardEvent){
@@ -80,18 +84,18 @@ Controller.prototype.onKeyup = function(keyboardEvent){
     }
 }
 
-Controller.prototype.onUpdate = function(){
+Controller.prototype.onUpdate = function(updateFlag){
     var titleText = this.view.pickElements.writeTitle.innerText;
     var contentsText = this.view.pickElements.writeContents.innerText;
     var key = this.model.generatorKey();
-
+    if ( contentsText.length <= 0 ) return;
     this.model.inValidator(key, titleText, contentsText);
     this.view.generatorMemo(false, key).clearForm();
     this.bindEvents();
 }
 
 Controller.prototype.onRemove = function(e){
-    this.model.removeData(e.target.dataset.id)
+    this.model.removeData(e.target.dataset.key)
     this.view.removeMemo(e.target);
 }
 
@@ -105,20 +109,17 @@ Controller.prototype.onChangeColor = function(e){
 
 Controller.prototype.onModifyDisplay = function(e){
     e.stopPropagation();
-    var key = e.target.dataset.id;
+    var key = e.target.dataset.key;
     this.view.modifyDisplay(key);
 }
 
 Controller.prototype.onModifySave = function(e){
-    var key = this.view.pickElements.modifySave.dataset.id;
+    var key = e.target.dataset.key;
     var titleText = this.view.pickElements.modifyTitle.innerText;
     var contentsText = this.view.pickElements.modifyContents.innerText;
-    console.log('onModifySave()', key)
-    console.log('onModifySave()', titleText)
-    console.log('onModifySave()', contentsText)
+    if( key === undefined ) return;  //두번실행막음
     this.model.inValidator(key, titleText, contentsText);
-    this.view.modifyDraw(key, titleText, contentsText);
-    console.log(this)
+    this.view.modifyDraw(key);
 }
 
 Controller.prototype.onModifyCancel = function(){

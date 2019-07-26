@@ -2,7 +2,15 @@
 @import "./base.css";
 @import "./layout.css";
 
-
+.view-select {
+    position:absolute;
+    left:50px;
+    top:20px;
+    width:100px;
+    height:40px;
+    margin:0;
+    padding:0 10px
+}
 .memo-wrapper {
     position:relative;
     padding:20px 50px;
@@ -162,6 +170,16 @@
 }
 .memo__action--modify:hover {
     background-image:url('../images/modify_icon_active.png');
+}
+.memo__action--favorite {
+    right:105px;
+    background-image:url('../images/favorite_icon.png');
+}
+.memo__action--favorite:hover {
+    background-image:url('../images/favorite_icon_active.png');
+}
+.memo__action--favorite.on {
+    background-image:url('../images/favorite_icon_active.png');
 }
 .modify-wrapper {
     display:none;

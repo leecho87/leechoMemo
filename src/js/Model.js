@@ -53,12 +53,9 @@ Model.prototype.generatorData = function(key, title, contents, date){
         title,
         contents,
         date,
+        favorite : false
     };
     return this;
-}
-
-Model.prototype.modifyData = function(key){
-    console.log(tag, 'modifyData()');
 }
 
 Model.prototype.removeData = function(key){
